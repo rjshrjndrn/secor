@@ -3,6 +3,26 @@ secor:
   zookeeper:
     quorum: "kafka-zookeeper:2181"
   backup:
+    cloudService: S3
+    awsAccessKey: ""
+    awsSecretKey: ""
+    properties:
+      backupProperties: |-
+        # Name of the S3 storage bucket where log files are stored.
+        secor.s3.bucket=logs-secor-backup-prod
+
+        # storage path where files are stored within the bucket.
+        secor.s3.path=raw_logs
+
+        # S3 path where sequence files are stored.
+        # secor.s3.path=raw_logs/secor_backup
+      partitionProperties: |-
+        # Name of the Google cloud storage bucket where log files are stored.
+        secor.s3.bucket=example-logs-secor-prod
+
+        # Google cloud storage path where files are stored within the bucket.
+        secor.s3.path=data
+
     configFile: /opt/secor/config/secor.kubernetes-prod.backup.properties
     logConfigFile: /opt/secor/config/log4j.kubernetes-prod.properties
     storage:
